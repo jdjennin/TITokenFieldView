@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "TITokenFieldView.h"
+#import "InviteFriendGroupsViewController.h"
 
-@interface TokenFieldExampleViewController : UIViewController <TITokenFieldViewDelegate, UITextViewDelegate> {
+@interface TokenFieldExampleViewController : UIViewController <TITokenFieldViewDelegate, UITextViewDelegate, InviteFriendsDelegate> {
 
 	TITokenFieldView * tokenFieldView;
 	UITextView * messageView;
 	
 	CGFloat keyboardHeight;
 }
+
+- (void)cancelContactSelection;
+- (void)saveContacts;
 
 @end
 

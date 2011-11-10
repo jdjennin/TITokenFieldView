@@ -7,6 +7,7 @@
 //
 
 #import "TITokenFieldView.h"
+#import "ContactTableViewCell.h"
 
 //==========================================================
 // - Private Additions
@@ -74,7 +75,7 @@ CGFloat const kSeparatorHeight = 1;
 #pragma mark Main Shit
 - (id)initWithFrame:(CGRect)frame {
 	
-    if ((self = [super initWithFrame:frame])){
+  if ((self = [super initWithFrame:frame])){
 		
 		[self setBackgroundColor:[UIColor clearColor]];
 		[self setDelaysContentTouches:NO];
@@ -87,11 +88,11 @@ CGFloat const kSeparatorHeight = 1;
 		
 		// This view (contentView) is created for convenience, because it resizes and moves with the rest of the subviews.
 		contentView = [[UIView alloc] initWithFrame:CGRectMake(0, kTokenFieldHeight, self.frame.size.width, self.frame.size.height - kTokenFieldHeight)];
-		[contentView setBackgroundColor:[UIColor clearColor]];
+		[contentView setBackgroundColor:[UIColor colorWithRed:227/255.0 green:231/255.0 blue:234/255.0 alpha:1.0]];
 		[self addSubview:contentView];
 		[self setContentSize:CGSizeMake(self.frame.size.width, self.contentView.frame.origin.y + self.contentView.frame.size.height + 2)];
 		[contentView release];
-		
+    
 		tokenField = [[TITokenField alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, kTokenFieldHeight)];
 		[tokenField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 		[tokenField setBackgroundColor:[UIColor whiteColor]];
@@ -104,7 +105,7 @@ CGFloat const kSeparatorHeight = 1;
 		[self addSubview:separator];
 		[separator release];
 		
-		resultsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, kTokenFieldHeight + 1, self.frame.size.width, 10)];
+		resultsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, kTokenFieldHeight + 1, self.frame.size.width, 159)];
 		[resultsTable setSeparatorColor:[UIColor colorWithWhite:0.85 alpha:1]];
 		[resultsTable setBackgroundColor:[UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1]];
 		[resultsTable setDelegate:self];
@@ -122,7 +123,7 @@ CGFloat const kSeparatorHeight = 1;
 		[self updateContentSize];
 	}
 	
-    return self;
+  return self;
 }
 
 - (void)setFrame:(CGRect)aFrame {
@@ -151,8 +152,9 @@ CGFloat const kSeparatorHeight = 1;
 
 - (void)layoutSubviews {
 	
-	CGFloat relativeFieldHeight = tokenField.frame.size.height - self.contentOffset.y;
-	[resultsTable setHeight:(self.frame.size.height - relativeFieldHeight)];
+  //	CGFloat relativeFieldHeight = self.frame.size.height - self.contentOffset.y;
+  //	[resultsTable setHeight:(self.frame.size.height - relativeFieldHeight)];
+  //  NSLog(@"Laying out subviews with resultsTable height of %f", (self.frame.size.height - relativeFieldHeight));
 }
 
 - (void)updateContentSize {
@@ -160,7 +162,17 @@ CGFloat const kSeparatorHeight = 1;
 	// I add 1 here so it'll do that elastic scrolling thing.
 	// As a user, I like to drag a view around just for the sake of it.
 	// Hopefully other people get the same weird kick :)
+  CGPoint offset = CGPointMake(self.contentOffset.x, self.contentOffset.y);
 	[self setContentSize:CGSizeMake(self.frame.size.width, self.contentView.frame.origin.y + self.contentView.frame.size.height + 1)];
+  [self setContentOffset:offset animated:NO];
+}
+
+- (void)restoreAllTokens {
+  [tokenField restoreAllTokens];
+}
+
+- (void)hideTable {
+  [resultsTable setHidden:YES];
 }
 
 - (BOOL)canBecomeFirstResponder {
@@ -175,18 +187,22 @@ CGFloat const kSeparatorHeight = 1;
 	return [tokenField resignFirstResponder];
 }
 
+- (void)removeAllTokens {
+  [tokenField removeAllTokens];
+}
+
 #pragma mark TableView Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+  return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	if ([delegate respondsToSelector:@selector(tokenField:resultsTableView:heightForRowAtIndexPath:)]){
-		return [delegate tokenField:tokenField resultsTableView:tableView heightForRowAtIndexPath:indexPath];
-	}
+  //	if ([delegate respondsToSelector:@selector(tokenField:resultsTableView:heightForRowAtIndexPath:)]){
+  //		return [delegate tokenField:tokenField resultsTableView:tableView heightForRowAtIndexPath:indexPath];
+  //	}
 	
-	return 44;
+	return 48;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -200,7 +216,7 @@ CGFloat const kSeparatorHeight = 1;
 	BOOL hideTable = !resultsArray.count;
 	[resultsTable setHidden:hideTable];
 	[textFieldShadow setHidden:hideTable];
-	[tokenField scrollForEdit:!hideTable];
+  [tokenField scrollForEdit:!hideTable];
 	
 	UIColor * separatorColor = hideTable ? [UIColor colorWithWhite:0.7 alpha:1] : [UIColor colorWithRed:150/255 green:150/255 blue:150/255 alpha:0.4];
 	[separator setBackgroundColor:separatorColor];
@@ -211,23 +227,29 @@ CGFloat const kSeparatorHeight = 1;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	if ([delegate respondsToSelector:@selector(tokenField:resultsTableView:cellForObject:)]){
-		return [delegate tokenField:tokenField resultsTableView:tableView cellForObject:[resultsArray objectAtIndex:indexPath.row]];
-	}
+  //	if ([delegate respondsToSelector:@selector(tokenField:resultsTableView:cellForObject:)]){
+  //		return [delegate tokenField:tokenField resultsTableView:tableView cellForObject:[resultsArray objectAtIndex:indexPath.row]];
+  //	}
 	
-    static NSString *CellIdentifier = @"ResultsCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+  static NSString *CellIdentifier = @"ResultsCell";
+  
+  ContactTableViewCell *cell = (ContactTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ContactTableViewCell" owner:self options:nil];
+    cell = (ContactTableViewCell *)[nib objectAtIndex:0];
+  }
 	
-	[cell.textLabel setText:[resultsArray objectAtIndex:indexPath.row]];
+  NSDictionary *d = [resultsArray objectAtIndex:[indexPath row]];
+  cell.contactName.text = [d objectForKey:@"name"];
+  cell.addressType.text = [d objectForKey:@"type"];
+  cell.address.text = [d objectForKey:@"email"];
 	
-    return cell;
+  return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	[tokenField addToken:[resultsArray objectAtIndex:indexPath.row]];
+  //  [tokenField addToken:[[resultsArray objectAtIndex:[indexPath row]] objectForKey:@"name"]];
+  [tokenField addToken:[resultsArray objectAtIndex:[indexPath row]]];
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -235,26 +257,36 @@ CGFloat const kSeparatorHeight = 1;
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
 	
-	[resultsArray removeAllObjects];
-	[resultsTable reloadData];
+  if (resultsArray.count > 0) {
+    [resultsArray removeAllObjects];
+    [resultsTable reloadData];
+  }
 	
-    return YES;
+  return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 	
-	if (![textField.text isEqualToString:kTextEmpty] && ![textField.text isEqualToString:kTextHidden] && ![textField.text isEqualToString:@""]){
-		
-		NSArray * titles = [[NSArray alloc] initWithArray:tokenTitles];
-		for (NSString * title in titles) [tokenField addToken:title];
-		[titles release];
-		
-	}
+  //	if (![textField.text isEqualToString:kTextEmpty] && ![textField.text isEqualToString:kTextHidden] && ![textField.text isEqualToString:@""]){
+  //		
+  //		NSArray * titles = [[NSArray alloc] initWithArray:tokenTitles];
+  //		
+  //		for (NSString * title in titles){
+  //			[tokenField addToken:title];
+  //		}
+  //		
+  //		[titles release];
+  //		
+  //	}
 	
 	[tokenField setText:kTextEmpty];
+
+  if (resultsArray.count > 0) {
     [resultsTable reloadData];
+  }
 	
-	[tokenField updateHeight:NO];
+//	[tokenField updateHeight:NO];
+  [tokenField scrollForEdit:NO];
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
@@ -265,7 +297,11 @@ CGFloat const kSeparatorHeight = 1;
 - (void)textFieldDidEndEditing:(UITextField *)textField {
 	
 	NSArray * tokens = [[NSArray alloc] initWithArray:tokenField.tokensArray];
-	for (TIToken * token in tokens) [token removeFromSuperview];
+	
+	for (TIToken * token in tokens){
+		[token removeFromSuperview];
+	}
+	
 	[tokens release];
 	
 	[self setTokenTitles:[tokenField getTokenTitles]];
@@ -273,11 +309,12 @@ CGFloat const kSeparatorHeight = 1;
 	NSString * untokenized = [tokenTitles componentsJoinedByString:@", "];
 	CGSize untokSize = [untokenized sizeWithFont:[UIFont systemFontOfSize:14]];
 	
-	[tokenField.tokensArray removeAllObjects];
-	[tokenField updateHeight:YES];
+//	[tokenField.tokensArray removeAllObjects];
+  [tokenField hideAllTokens];
+//	[tokenField updateHeight:YES];
 	
 	if (untokSize.width > self.frame.size.width - 120){
-		untokenized = [NSString stringWithFormat:@"%d recipients", tokenTitles.count];
+		untokenized = [NSString stringWithFormat:@"%i recipients", tokenTitles.count];
 	}
 	
 	[textField setText:untokenized];
@@ -312,7 +349,7 @@ CGFloat const kSeparatorHeight = 1;
 		TIToken * tok = [tokenField.tokensArray lastObject];
 		[tok setHighlighted:YES];
 		[tokenField setText:kTextHidden];
-		[tokenField updateHeight:NO];
+//		[tokenField updateHeight:NO];
 		
 		return NO;
 	}
@@ -357,16 +394,31 @@ CGFloat const kSeparatorHeight = 1;
 - (void)processLeftoverText:(NSString *)text {
 	
 	if (![text isEqualToString:kTextEmpty] && ![text isEqualToString:kTextHidden] && 
-		[[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] != 0){
+      [[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] != 0){
 		
-		NSUInteger loc = [[text substringWithRange:NSMakeRange(0, 1)] isEqualToString:@" "] ? 1 : 0;
-		[tokenField addToken:[text substringWithRange:NSMakeRange(loc, text.length - 1)]];
+		NSString * title = nil;
+		
+		if ([[text substringWithRange:NSMakeRange(0, 1)] isEqualToString:@" "]){
+			title = [text substringWithRange:NSMakeRange(1, [text length] - 1)];
+		}
+		else
+		{
+			title = [text substringWithRange:NSMakeRange(0, [text length] - 1)];
+		}
+		
+    NSMutableDictionary *d = [NSMutableDictionary dictionary];
+    [d setObject:title forKey:@"name"];
+    [d setObject:title forKey:@"email"];
+    [d setObject:@"" forKey:@"type"];
+    //		[tokenField addToken:title];
+    [tokenField addToken:d];
 	}
 }
 
 - (void)tokenFieldResized:(TITokenField *)aTokenField {
-	
+	CGPoint offset = CGPointMake(self.contentOffset.x, self.contentOffset.y);
 	[self setContentSize:CGSizeMake(self.frame.size.width, self.contentView.frame.origin.y + self.contentView.frame.size.height + 2)];
+  [self setContentOffset:offset animated:NO];
 	
 	if ([delegate respondsToSelector:@selector(tokenField:didChangeToFrame:)]){
 		[delegate tokenField:aTokenField didChangeToFrame:aTokenField.frame];
@@ -382,23 +434,35 @@ CGFloat const kSeparatorHeight = 1;
 	// You could always subclass and override this if needed or do it on a background thread.
 	// GCD would be great for that.
 	
-	[resultsArray removeAllObjects];
-	[resultsTable reloadData];
+  if (resultsArray.count > 0) {
+    [resultsArray removeAllObjects];
+
+    [resultsTable reloadData];
+  }
 	
-	NSUInteger loc = [[substring substringWithRange:NSMakeRange(0, 1)] isEqualToString:@" "] ? 1 : 0;
-	NSString * typedString = [[substring substringWithRange:NSMakeRange(loc, substring.length - 1)] lowercaseString];
+	NSString * typedString = nil;
+	
+	if ([[substring substringWithRange:NSMakeRange(0, 1)] isEqualToString:@" "]){
+		typedString = [[substring substringWithRange:NSMakeRange(1, [substring length] - 1)] lowercaseString];
+	}
+	else
+	{
+		typedString = [[substring substringWithRange:NSMakeRange(0, [substring length] - 1)] lowercaseString];
+	}
 	
 	NSArray * source = [[NSArray alloc] initWithArray:sourceArray];
 	
-	for (NSString * sourceObject in source){
+	for (NSDictionary * d in source){
 		
+    NSString *sourceObject = [d objectForKey:@"name"];
+    
 		NSString * query = [sourceObject lowercaseString];
 		
 		if ([query rangeOfString:typedString].location != NSNotFound){
 			
 			if (showAlreadyTokenized){
-				if (![resultsArray containsObject:sourceObject]){
-					[resultsArray addObject:sourceObject];
+				if (![resultsArray containsObject:d]){
+					[resultsArray addObject:d];
 				}
 			}
 			else
@@ -417,8 +481,8 @@ CGFloat const kSeparatorHeight = 1;
 				[tokens release];
 				
 				if (shouldAdd){
-					if (![resultsArray containsObject:sourceObject]){
-						[resultsArray addObject:sourceObject];
+					if (![resultsArray containsObject:d]){
+						[resultsArray addObject:d];
 					}
 				}
 			}
@@ -427,15 +491,21 @@ CGFloat const kSeparatorHeight = 1;
 	
 	[source release];
 	
-	[resultsArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-	[resultsTable reloadData];
+  //	[resultsArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+  NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+  [resultsArray sortUsingDescriptors:[NSArray arrayWithObjects:desc, nil]];
+  
+  if (resultsArray.count > 0) {
+    [resultsTable reloadData];
+  }
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<TITokenFieldView %p 'Token count: %d'>", self, tokenTitles.count];
+	return [NSString stringWithFormat:@"<TITokenFieldView %p 'Token count: %i'>", self, tokenTitles.count];
 }
 
 - (void)dealloc {
+	
 	[self setDelegate:nil];
 	[tokenTitles release];
 	[resultsArray release];
@@ -444,6 +514,7 @@ CGFloat const kSeparatorHeight = 1;
 }
 
 @end
+
 #pragma mark -
 #pragma mark TITokenField
 #pragma mark -
@@ -453,6 +524,7 @@ CGFloat const kSeparatorHeight = 1;
 
 @implementation TITokenField
 @synthesize tokensArray;
+@synthesize savedTokens;
 @synthesize numberOfLines;
 @synthesize addButton;
 @synthesize addButtonSelector;
@@ -460,7 +532,11 @@ CGFloat const kSeparatorHeight = 1;
 
 - (id)initWithFrame:(CGRect)frame {
 	
-    if ((self = [super initWithFrame:frame])){
+  if ((self = [super initWithFrame:frame])){
+		
+		NSMutableArray * array = [[NSMutableArray alloc] init];
+		[self setTokensArray:array];
+		[array release];
 		
 		[self setBorderStyle:UITextBorderStyleNone];
 		[self setTextColor:[UIColor blackColor]];
@@ -476,10 +552,11 @@ CGFloat const kSeparatorHeight = 1;
 		
 		UIButton * button = [UIButton buttonWithType:UIButtonTypeContactAdd];
 		
-		CGRect newFrame = button.frame;
-		newFrame.origin = CGPointMake(self.frame.size.width - button.frame.size.width - 6, 
-									  self.frame.size.height + self.frame.origin.y - button.frame.size.height - 6);
-		[button setFrame:newFrame];
+		[button setFrame:CGRectMake(self.frame.size.width - button.frame.size.width - 6,
+                                self.frame.size.height + self.frame.origin.y - button.frame.size.height - 6,
+                                button.frame.size.width,
+                                button.frame.size.height)];
+		
 		[button setUserInteractionEnabled:YES];
 		[button setHidden:YES];
 		[button addTarget:self action:@selector(performButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -494,23 +571,26 @@ CGFloat const kSeparatorHeight = 1;
 		// This is not something we want,
 		// so instead, we add a subview.
 		[self setPromptText:@"To:"];
-		[self setText:kTextEmpty];
 		
-		tokensArray = [[NSMutableArray alloc] init];
-    }
+		[self setText:kTextEmpty];
+  }
 	
-    return self;
+  return self;
 }
 
 #pragma mark Token Handlers
-- (void)addToken:(NSString *)title {
+- (void)addToken:(NSDictionary *)contact {
 	
+  NSLog(@"Currently %i contacts chosen", [tokensArray count]);
+  NSString *title = [contact objectForKey:@"name"];
+  
 	if (title){
 		
 		if (![self isFirstResponder]) [self becomeFirstResponder];
 		
 		TIToken * token = [[TIToken alloc] initWithTitle:title];
 		[token setDelegate:self];
+    [token setContactInfo:contact];
 		
 		[self addSubview:token];
 		[tokensArray addObject:token];
@@ -519,6 +599,15 @@ CGFloat const kSeparatorHeight = 1;
 		[self updateHeight:NO];
 		[self setText:kTextEmpty];
 	}
+}
+
+- (void)removeAllTokens {
+  for (TIToken *t in [tokensArray reverseObjectEnumerator]) {
+    [t removeFromSuperview];
+    [tokensArray removeObject:t];
+  }
+  [self setText:kTextEmpty];
+  [self updateHeight:YES];
 }
 
 - (void)removeToken:(TIToken *)token {
@@ -572,7 +661,10 @@ CGFloat const kSeparatorHeight = 1;
 			numberOfLines++;
 			cursorLocation.x = leftMargin;
 			
-			if (numberOfLines > 1) cursorLocation.x = initialPadding;
+			if (numberOfLines > 1){
+				cursorLocation.x = initialPadding;
+			}
+			
 			cursorLocation.y += lineHeight;
 		}
 		
@@ -600,7 +692,10 @@ CGFloat const kSeparatorHeight = 1;
 		numberOfLines++;
 		cursorLocation.x = leftMargin;
 		
-		if (numberOfLines > 1) cursorLocation.x = initialPadding;
+		if (numberOfLines > 1){
+			cursorLocation.x = initialPadding;
+		}
+		
 		cursorLocation.y += lineHeight;
 	}
 	
@@ -611,10 +706,28 @@ CGFloat const kSeparatorHeight = 1;
 
 typedef void (^AnimationBlock)();
 
+- (void)hideAllTokens {
+  
+  self.savedTokens = [[tokensArray copy] autorelease];
+  [self removeAllTokens];
+  [self updateHeight:YES];
+}
+
+- (void)restoreAllTokens {
+  for (TIToken *t in self.savedTokens) {
+    [self addToken:t.contactInfo];
+  }
+  self.savedTokens = nil;
+  [self updateHeight:YES];
+  [self setNeedsLayout];
+}
+
 - (void)updateHeight:(BOOL)scrollToTop {
 	
 	CGFloat previousHeight = self.frame.size.height;
 	CGFloat newHeight = [self layoutTokens];
+  
+  NSLog(@"New height is %f", newHeight);
 	
 	TITokenFieldView * parentView = (TITokenFieldView *)self.superview;
 	
@@ -629,8 +742,8 @@ typedef void (^AnimationBlock)();
 			[parentView.resultsTable setOriginY:newHeight + 1];
 			[parentView.contentView setOriginY:newHeight];
 			[self setHeight:newHeight];
-		};
-		
+    };		
+    
 		if (previousHeight < newHeight){
 			[UIView animateWithDuration:0.3 animations:^{animationBlock();}];
 		}
@@ -643,31 +756,56 @@ typedef void (^AnimationBlock)();
 	}
 	
 	[addButton setFrame:CGRectMake(self.frame.size.width - addButton.frame.size.width - 6, 
-								   self.frame.size.height + self.frame.origin.y - addButton.frame.size.height - 6, 
-								   addButton.frame.size.width, 
-								   addButton.frame.size.height)];
+                                 self.frame.size.height + self.frame.origin.y - addButton.frame.size.height - 6, 
+                                 addButton.frame.size.width, 
+                                 addButton.frame.size.height)];
 	
-	if (scrollToTop) [parentView setContentOffset:CGPointMake(0, 0) animated:YES];
+//	if (scrollToTop) {
+//    [parentView setContentOffset:CGPointMake(0, 0) animated:YES]; 
+//  }
 }
 
 - (void)scrollForEdit:(BOOL)shouldMove {
-	
 	TITokenFieldView * parentView = (TITokenFieldView *)self.superview;
 	
-	[parentView setScrollsToTop:!shouldMove];
-	[parentView setScrollEnabled:!shouldMove];
-	
-	CGFloat offset = numberOfLines == 1 || !shouldMove ? 0 : (self.frame.size.height - kTokenFieldHeight) + 1;
-	[parentView setContentOffset:CGPointMake(0, self.frame.origin.y + offset) animated:YES];
+//	[parentView setScrollsToTop:!shouldMove];
+//	[parentView setScrollEnabled:!shouldMove];
+  [parentView setScrollsToTop:NO];
+  [parentView setScrollEnabled:YES];
+  
+//	THESE ARE THE LINES HNNNNNG
+//	CGFloat offset = numberOfLines == 1 || !shouldMove ? 0 : (self.frame.size.height - kTokenFieldHeight) + 1;
+//	[parentView setContentOffset:CGPointMake(0, self.frame.origin.y + offset) animated:NO];
+//  NSLog(@"Content Offset is now %f", self.frame.origin.y + offset);
+//  END OF THE LINES HNNNNNG
+  
+  if (parentView.frame.size.height < (kTokenFieldHeight * numberOfLines) && !shouldMove) {
+    // Dividing by 3.0 works well here for ((kTokenFieldHeight * numberOfLines)/3.0, though a constant number is not quite exact. This number needs to grow linearly as well. Closest so far
+//    [parentView setContentOffset:CGPointMake(0, ((kTokenFieldHeight * numberOfLines)/3.0)) animated:YES];
+//    if (parentView.frame.size.height + parentView.frame.origin.y > 198) {
+    if (kTokenFieldHeight * numberOfLines > 198) {
+      // New closest so far
+      [parentView setContentOffset:CGPointMake(0, kTokenFieldHeight * numberOfLines - 198) animated:YES];
+    }
+  } else {
+    CGFloat offset = numberOfLines == 1 || !shouldMove ? 0 : (self.frame.size.height - kTokenFieldHeight) + 1;
+    if (self.frame.origin.y + offset == 0) {
+      return;
+    }
+    [parentView setContentOffset:CGPointMake(0, self.frame.origin.y + offset) animated:YES];
+  }
 }
 
 #pragma mark Other
 - (NSArray *)getTokenTitles {
 	
 	NSMutableArray * titles = [[NSMutableArray alloc] init];
-	
 	NSArray * tokens = [[NSArray alloc] initWithArray:tokensArray];
-	for (TIToken * token in tokens) [titles addObject:token.title];
+	
+	for (TIToken * token in tokens){
+		[titles addObject:token.title];
+	}
+	
 	[tokens release];
 	
 	return [titles autorelease];
@@ -684,7 +822,11 @@ typedef void (^AnimationBlock)();
 	}
 	
 	NSArray * tokens = [[NSArray alloc] initWithArray:tokensArray];
-	for (TIToken * token in tokens) [token setHighlighted:NO];
+	
+	for (TIToken * token in tokens){
+		[token setHighlighted:NO];
+	}
+	
 	[tokens release];
 	
 	if ([self.text isEqualToString:kTextHidden]) [self setText:kTextEmpty];
@@ -750,7 +892,8 @@ typedef void (^AnimationBlock)();
 	[self setDelegate:nil];
 	[addButton release];
 	[tokensArray release];
-    [super dealloc];
+  self.savedTokens = nil;
+  [super dealloc];
 }
 #pragma mark -
 #pragma mark TIToken
@@ -769,32 +912,34 @@ typedef void (^AnimationBlock)();
 @synthesize title;
 @synthesize delegate;
 @synthesize croppedTitle;
-@synthesize tintColor;
+@synthesize contactInfo;
 
 - (id)initWithTitle:(NSString *)aTitle {
 	
 	if ((self = [super init])){
 		
-		title = [aTitle copy];
-		croppedTitle = [(aTitle.length > 24 ? [[aTitle substringToIndex:24] stringByAppendingString:@"..."] : aTitle) copy];
+		[self setTitle:aTitle];
+		[self setCroppedTitle:aTitle];
 		
-		//tintColor = [[UIColor colorWithRed:0.867 green:0.906 blue:0.973 alpha:1] retain];
-		tintColor = [[UIColor colorWithRed:0.871 green:0.749 blue:0.573 alpha:1.000] retain];
+		if ([aTitle length] > 24){
+			NSString * shortTitle = [aTitle substringWithRange:NSMakeRange(0, 24)];
+			[self setCroppedTitle:[NSString stringWithFormat:@"%@...", shortTitle]];
+		}
 		
 		CGSize tokenSize = [croppedTitle sizeWithFont:kTokenTitleFont];
 		
 		//We lay the tokens out all at once, so it doesn't matter what the X,Y coords are.
 		[self setFrame:CGRectMake(0, 0, tokenSize.width + 17, tokenSize.height + 8)];
 		[self setBackgroundColor:[UIColor clearColor]];
-		
-		UILongPressGestureRecognizer * longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self 
-																										   action:@selector(tokenWasPressed:)];
-		[longPressRecognizer setMinimumPressDuration:0];
-		[self addGestureRecognizer:longPressRecognizer];
-		[longPressRecognizer release];
 	}
 	
 	return self;
+}
+
++ (id)tokenWithContactInfo:(NSDictionary *)d {
+  TIToken *t = [[[self class] alloc] initWithTitle:[d objectForKey:@"name"]];;
+  t.contactInfo = d;
+  return [t autorelease];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -811,42 +956,31 @@ typedef void (^AnimationBlock)();
 	CGFloat arcValue = (bounds.size.height / 2) + 1;
 	
 	CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-	CGPoint endPoint = CGPointMake(1, self.bounds.size.height + 10);
+	CGPoint endPoint = CGPointMake(1, self.frame.size.height + 10);
 	
-	// Draw the outline.
 	CGContextSaveGState(context);
 	CGContextBeginPath(context);
 	CGContextAddArc(context, arcValue, arcValue, arcValue, (M_PI / 2), (3 * M_PI / 2), NO);
 	CGContextAddArc(context, bounds.size.width - arcValue, arcValue, arcValue, 3 * M_PI / 2, M_PI / 2, NO);
 	CGContextClosePath(context);
 	
-	CGFloat red = 1;
-	CGFloat green = 1;
-	CGFloat blue = 1;
-	CGFloat alpha = 1;
-	[tintColor getRed:&red green:&green blue:&blue alpha:&alpha];
-	
 	if (highlighted){
-		CGContextSetFillColor(context, (CGFloat[8]){red * 0.236, green * 0.407, blue * 1.028, alpha});
-		//CGContextSetFillColor(context, (CGFloat[8]){red - 0.669, green - 0.537, blue + 0.027, alpha});
-		//CGContextSetFillColor(context, (CGFloat[8]){0.207, 0.369, 1, 1});
+		CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:0.207 green:0.369 blue:1 alpha:1] CGColor]);
 		CGContextFillPath(context);
 		CGContextRestoreGState(context);
 	}
 	else
 	{
+		
 		CGContextClip(context);
 		CGFloat locations[2] = {0, 0.95};
-		CGFloat components[8] = {red*0.720, green*0.809, blue*1.028, alpha, red*0.529, green*0.563, blue*0.862, alpha};
-		//CGFloat components[8] = {red - 0.245, green - 0.173, blue + 0.027, alpha, red - 0.413, green - 0.396, blue - 0.134, alpha};
-		//CGFloat components[8] = {0.631, 0.733, 1, 1, 0.463, 0.510, 0.839, 1};
+		CGFloat components[8] = {0.631, 0.733, 1, 1, 0.463, 0.510, 0.839, 1};
 		CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
 		CGContextDrawLinearGradient(context, gradient, CGPointZero, endPoint, 0);
 		CGGradientRelease(gradient);
 		CGContextRestoreGState(context);
 	}
 	
-	// Draw the inner gradient.
 	CGContextSaveGState(context);
 	CGContextBeginPath(context);
 	CGContextAddArc(context, arcValue, arcValue, (bounds.size.height / 2), (M_PI / 2) , (3 * M_PI / 2), NO);
@@ -855,63 +989,50 @@ typedef void (^AnimationBlock)();
 	
 	CGContextClip(context);
 	
-	CGFloat locations[2] = {0, highlighted ? 0.8 : 0.4};
-	CGFloat nonHiglightedComp[8] = {red, green, blue, alpha, red*0.841, green*0.892, blue*0.973, alpha};
-	CGFloat highlightedComp[8] = {red*0.417, green*0.615, blue*1.028, alpha, red*0.287, green*0.381, blue*1.028, alpha};
-	/*
-	CGFloat highlightedComp[8] = {red - 0.511, green - 0.349, blue + 0.027, alpha, red - 0.625, green - 0.561, blue + 0.027, alpha};
-	CGFloat nonHiglightedComp[8] = {red, green, blue, alpha, red - 0.139, green - 0.098, blue - 0.028, alpha};
-	 */
-	/*CGFloat highlightedComp[8] = {0.365, 0.557, 1, 1, 0.251, 0.345, 1, 1};
-	 CGFloat nonHighlightedComp[8] = {0.867, 0.906, 0.973, 1, 0.737, 0.808, 0.945, 1};
-	 */
+	if (highlighted){
+		
+		CGFloat locations[2] = {0, 0.8};
+		CGFloat components[8] = {0.365, 0.557, 1, 1, 0.251, 0.345, 1, 1};
+		CGGradientRef gradient = CGGradientCreateWithColorComponents (colorspace, components, locations, 2);
+		CGContextDrawLinearGradient(context, gradient, CGPointZero, endPoint, 0);
+		CGGradientRelease(gradient);
+		
+		[[UIColor whiteColor] set];
+		[croppedTitle drawInRect:textBounds withFont:[UIFont systemFontOfSize:14]];
+	}
+	else
+	{
+		
+		CGFloat locations[2] = {0, 0.4};
+		CGFloat components[8] = {0.867, 0.906, 0.973, 1, 0.737, 0.808, 0.945, 1};
+		CGGradientRef gradient = CGGradientCreateWithColorComponents (colorspace, components, locations, 2);
+		CGContextDrawLinearGradient (context, gradient, CGPointZero, endPoint, 0);
+		CGGradientRelease(gradient);
+		
+		[[UIColor blackColor] set];
+		[croppedTitle drawInRect:textBounds withFont:kTokenTitleFont];
+	}
 	
-	CGGradientRef gradient = CGGradientCreateWithColorComponents (colorspace, highlighted ? highlightedComp : nonHiglightedComp, locations, 2);
-	CGContextDrawLinearGradient(context, gradient, CGPointZero, endPoint, 0);
-	CGGradientRelease(gradient);
 	CGColorSpaceRelease(colorspace);
-	
-	[(highlighted ? [UIColor whiteColor] : [UIColor blackColor]) set];
-	[croppedTitle drawInRect:textBounds withFont:kTokenTitleFont];
-	
 	CGContextRestoreGState(context);
 }
 
-- (void)tokenWasPressed:(UIGestureRecognizer *)gestureRecognizer {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
-	if (gestureRecognizer.state == UIGestureRecognizerStateChanged || gestureRecognizer.state == UIGestureRecognizerStateBegan){
-		
-		highlighted = CGRectContainsPoint(self.bounds, [gestureRecognizer locationInView:self]);
-		[self setNeedsDisplay];
+	if ([delegate respondsToSelector:@selector(tokenGotFocus:)]){
+		[delegate tokenGotFocus:self];
 	}
 	
-	if (gestureRecognizer.state == UIGestureRecognizerStateEnded) [self setHighlighted:highlighted];
+	[self setHighlighted:YES];
 }
 
 - (void)setHighlighted:(BOOL)flag {
 	
-	if (highlighted != flag){
-		highlighted = flag;
-		[self setNeedsDisplay];
-	}
-	
-	if (flag && [delegate respondsToSelector:@selector(tokenGotFocus:)]){
-		[delegate tokenGotFocus:self];
-	}
-	
 	if (!flag && [delegate respondsToSelector:@selector(tokenLostFocus:)]){
 		[delegate tokenLostFocus:self];
 	}
-}
-
-- (void)setTintColor:(UIColor *)newTintColor {
 	
-	if (!newTintColor) newTintColor = [UIColor colorWithRed:0.867 green:0.906 blue:0.973 alpha:1];
-	
-	[newTintColor retain];
-	[tintColor release];
-	tintColor = newTintColor;
-	
+	highlighted = flag;
 	[self setNeedsDisplay];
 }
 
@@ -923,8 +1044,8 @@ typedef void (^AnimationBlock)();
 	[self setDelegate:nil];
 	[croppedTitle release];
 	[title release];
-	[tintColor release];
-    [super dealloc];
+  self.contactInfo = nil;
+  [super dealloc];
 }
 
 @end
@@ -939,11 +1060,11 @@ typedef void (^AnimationBlock)();
 
 - (id)initWithFrame:(CGRect)frame {
 	
-    if ((self = [super initWithFrame:frame])){
+  if ((self = [super initWithFrame:frame])){
 		[self setBackgroundColor:[UIColor clearColor]];
-    }
+  }
 	
-    return self;
+  return self;
 }
 
 

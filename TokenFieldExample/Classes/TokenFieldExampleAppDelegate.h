@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TokenFieldExampleAppDelegate : NSObject <UIApplicationDelegate> {
+@interface TokenFieldExampleAppDelegate : NSObject <UIApplicationDelegate, UINavigationControllerDelegate> {
 	
     UIWindow * window;
     UINavigationController * navigationController;

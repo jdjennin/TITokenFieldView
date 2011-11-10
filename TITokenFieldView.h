@@ -44,6 +44,7 @@
 
 - (UITableViewCell *)tokenField:(TITokenField *)tokenField resultsTableView:(UITableView *)tableView cellForObject:(id)object;
 - (CGFloat)tokenField:(TITokenField *)tokenField resultsTableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 @protocol TITokenDelegate <NSObject>
@@ -87,6 +88,10 @@
 @property (nonatomic, readonly) TITokenField * tokenField;
 
 - (void)updateContentSize;
+- (void)removeAllTokens;
+- (void)restoreAllTokens;
+- (void)hideTable;
+
 @end
 
 //==========================================================
@@ -95,7 +100,8 @@
 
 @interface TITokenField : UITextField <TITokenDelegate> {
 
-	NSMutableArray * tokensArray;
+	NSMutableArray *tokensArray;
+  NSMutableArray *savedTokens;
 	CGPoint cursorLocation;
 	int numberOfLines;
 	
@@ -105,14 +111,18 @@
 	SEL addButtonSelector;
 }
 
+@property (nonatomic, retain) NSMutableArray *savedTokens;
 @property (nonatomic, retain) NSMutableArray * tokensArray;
 @property (nonatomic, readonly) int numberOfLines;
 @property (nonatomic, retain) UIButton * addButton;
 @property (nonatomic, assign) id addButtonTarget;
 @property (nonatomic, assign) SEL addButtonSelector;
 
-- (void)addToken:(NSString *)title;
+- (void)addToken:(NSDictionary *)contact;
 - (void)removeToken:(TIToken *)token;
+- (void)removeAllTokens;
+- (void)hideAllTokens;
+- (void)restoreAllTokens;
 
 - (CGFloat)layoutTokens;
 
@@ -132,16 +142,16 @@
 	
 	NSString * title;
 	NSString * croppedTitle;
-	
-	UIColor * tintColor;
+  NSDictionary *contactInfo;
 }
 
-@property (nonatomic, assign) id <TITokenDelegate> delegate;
+@property (nonatomic, retain) NSDictionary *contactInfo;
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
-@property (nonatomic, copy) NSString * title;
-@property (nonatomic, copy) NSString * croppedTitle;
-@property (nonatomic, retain) UIColor * tintColor;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * croppedTitle;
+@property (nonatomic, assign) id <TITokenDelegate> delegate;
 
 - (id)initWithTitle:(NSString *)aTitle;
++ (id)tokenWithContactInfo:(NSDictionary *)d;
 
 @end

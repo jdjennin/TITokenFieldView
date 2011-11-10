@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,32 @@
 		28D7ACF80DDB3853001CB0EB /* TokenFieldExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* TokenFieldExampleViewController.m */; };
 		E2EC196012F4AA7A00BB0A8B /* Names.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EC195D12F4AA7A00BB0A8B /* Names.m */; };
 		E2EC196112F4AA7A00BB0A8B /* TITokenFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EC195F12F4AA7A00BB0A8B /* TITokenFieldView.m */; };
+		EF09459813B13D1F00A409F4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF09459713B13D1F00A409F4 /* AddressBook.framework */; };
+		EF09459C13B1408800A409F4 /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09459A13B1408800A409F4 /* ContactTableViewCell.m */; };
+		EF09459D13B1408800A409F4 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF09459B13B1408800A409F4 /* ContactTableViewCell.xib */; };
+		EF0945AA13B28BE300A409F4 /* InviteFriendGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0945A813B28BE300A409F4 /* InviteFriendGroupsViewController.m */; };
+		EF0945AB13B28BE300A409F4 /* InviteFriendGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF0945A913B28BE300A409F4 /* InviteFriendGroupsViewController.xib */; };
+		EF0945B013B2915000A409F4 /* InviteFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0945AE13B2915000A409F4 /* InviteFriendsViewController.m */; };
+		EF0945B113B2915000A409F4 /* InviteFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF0945AF13B2915000A409F4 /* InviteFriendsViewController.xib */; };
+		EF0945B413B2945800A409F4 /* InviteFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0945B313B2945800A409F4 /* InviteFriendsTableViewCell.m */; };
+		EF0945B613B2946C00A409F4 /* InviteFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF0945B513B2946B00A409F4 /* InviteFriendsTableViewCell.xib */; };
+		EF0945C113B2D49000A409F4 /* bg-blue-overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945C013B2D49000A409F4 /* bg-blue-overlay.png */; };
+		EF0945C313B2D4DB00A409F4 /* save-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945C213B2D4DB00A409F4 /* save-btn.png */; };
+		EF0945C513B2D4F000A409F4 /* toolbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945C413B2D4F000A409F4 /* toolbar-bg.png */; };
+		EF0945C713B2D4FB00A409F4 /* white-striped-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945C613B2D4FB00A409F4 /* white-striped-bg.png */; };
+		EF0945C913B2D50B00A409F4 /* cancel-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945C813B2D50B00A409F4 /* cancel-btn.png */; };
+		EF0945CB13B2D51A00A409F4 /* done-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945CA13B2D51A00A409F4 /* done-btn.png */; };
+		EF0945CD13B2D54000A409F4 /* bg-teal.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945CC13B2D54000A409F4 /* bg-teal.png */; };
+		EF0945D013B2D54E00A409F4 /* bg-title-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945CE13B2D54E00A409F4 /* bg-title-bar.png */; };
+		EF0945D113B2D54E00A409F4 /* bg-top-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0945CF13B2D54E00A409F4 /* bg-top-bar.png */; };
+		EF14735A13B3EB5700C76C60 /* Choose-Contacts-BG.png in Resources */ = {isa = PBXBuildFile; fileRef = EF14735813B3EB5700C76C60 /* Choose-Contacts-BG.png */; };
+		EF14735B13B3EB5700C76C60 /* invite-friends-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EF14735913B3EB5700C76C60 /* invite-friends-bg.png */; };
+		EF70305513B2D9A700E0565A /* bg-white-textured.png in Resources */ = {isa = PBXBuildFile; fileRef = EF70305413B2D9A700E0565A /* bg-white-textured.png */; };
+		EF70305F13B2F3DE00E0565A /* notification-base.png in Resources */ = {isa = PBXBuildFile; fileRef = EF70305E13B2F3DE00E0565A /* notification-base.png */; };
+		EF70306213B2F4D800E0565A /* GroupsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF70306113B2F4D700E0565A /* GroupsTableViewCell.m */; };
+		EF70306413B2F52200E0565A /* GroupsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF70306313B2F52100E0565A /* GroupsTableViewCell.xib */; };
+		EFB4128913B3A387008893B1 /* check-mark.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB4128813B3A387008893B1 /* check-mark.png */; };
+		EFE9F1C613B4DF770027ACA5 /* Groups-Back-Btn.png in Resources */ = {isa = PBXBuildFile; fileRef = EFE9F1C513B4DF770027ACA5 /* Groups-Back-Btn.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +59,37 @@
 		E2EC195D12F4AA7A00BB0A8B /* Names.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Names.m; path = ../Names.m; sourceTree = SOURCE_ROOT; };
 		E2EC195E12F4AA7A00BB0A8B /* TITokenFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TITokenFieldView.h; path = ../TITokenFieldView.h; sourceTree = SOURCE_ROOT; };
 		E2EC195F12F4AA7A00BB0A8B /* TITokenFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TITokenFieldView.m; path = ../TITokenFieldView.m; sourceTree = SOURCE_ROOT; };
+		EF09459713B13D1F00A409F4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		EF09459913B1408800A409F4 /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
+		EF09459A13B1408800A409F4 /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
+		EF09459B13B1408800A409F4 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
+		EF0945A713B28BE300A409F4 /* InviteFriendGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendGroupsViewController.h; sourceTree = "<group>"; };
+		EF0945A813B28BE300A409F4 /* InviteFriendGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendGroupsViewController.m; sourceTree = "<group>"; };
+		EF0945A913B28BE300A409F4 /* InviteFriendGroupsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendGroupsViewController.xib; sourceTree = "<group>"; };
+		EF0945AD13B2915000A409F4 /* InviteFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsViewController.h; sourceTree = "<group>"; };
+		EF0945AE13B2915000A409F4 /* InviteFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsViewController.m; sourceTree = "<group>"; };
+		EF0945AF13B2915000A409F4 /* InviteFriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsViewController.xib; sourceTree = "<group>"; };
+		EF0945B213B2945800A409F4 /* InviteFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsTableViewCell.h; sourceTree = "<group>"; };
+		EF0945B313B2945800A409F4 /* InviteFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsTableViewCell.m; sourceTree = "<group>"; };
+		EF0945B513B2946B00A409F4 /* InviteFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsTableViewCell.xib; sourceTree = "<group>"; };
+		EF0945C013B2D49000A409F4 /* bg-blue-overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-blue-overlay.png"; sourceTree = "<group>"; };
+		EF0945C213B2D4DB00A409F4 /* save-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save-btn.png"; sourceTree = "<group>"; };
+		EF0945C413B2D4F000A409F4 /* toolbar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-bg.png"; sourceTree = "<group>"; };
+		EF0945C613B2D4FB00A409F4 /* white-striped-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white-striped-bg.png"; sourceTree = "<group>"; };
+		EF0945C813B2D50B00A409F4 /* cancel-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel-btn.png"; sourceTree = "<group>"; };
+		EF0945CA13B2D51A00A409F4 /* done-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-btn.png"; sourceTree = "<group>"; };
+		EF0945CC13B2D54000A409F4 /* bg-teal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-teal.png"; sourceTree = "<group>"; };
+		EF0945CE13B2D54E00A409F4 /* bg-title-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-title-bar.png"; sourceTree = "<group>"; };
+		EF0945CF13B2D54E00A409F4 /* bg-top-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-top-bar.png"; sourceTree = "<group>"; };
+		EF14735813B3EB5700C76C60 /* Choose-Contacts-BG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Choose-Contacts-BG.png"; sourceTree = "<group>"; };
+		EF14735913B3EB5700C76C60 /* invite-friends-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite-friends-bg.png"; sourceTree = "<group>"; };
+		EF70305413B2D9A700E0565A /* bg-white-textured.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-white-textured.png"; sourceTree = "<group>"; };
+		EF70305E13B2F3DE00E0565A /* notification-base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification-base.png"; sourceTree = "<group>"; };
+		EF70306013B2F4D700E0565A /* GroupsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsTableViewCell.h; sourceTree = "<group>"; };
+		EF70306113B2F4D700E0565A /* GroupsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsTableViewCell.m; sourceTree = "<group>"; };
+		EF70306313B2F52100E0565A /* GroupsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupsTableViewCell.xib; sourceTree = "<group>"; };
+		EFB4128813B3A387008893B1 /* check-mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check-mark.png"; sourceTree = "<group>"; };
+		EFE9F1C513B4DF770027ACA5 /* Groups-Back-Btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Groups-Back-Btn.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF09459813B13D1F00A409F4 /* AddressBook.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -56,6 +114,7 @@
 				1D3623250D0F684500981E51 /* TokenFieldExampleAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* TokenFieldExampleViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* TokenFieldExampleViewController.m */,
+				EF0945A613B28BA700A409F4 /* Other Contacts */,
 				E2EC1AC612F58B3B00BB0A8B /* TITokenFieldView */,
 			);
 			path = Classes;
@@ -93,6 +152,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EF0945BF13B2D48400A409F4 /* Images */,
 				8D1107310486CEB800E47090 /* TokenFieldExample-Info.plist */,
 			);
 			name = Resources;
@@ -101,6 +161,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EF09459713B13D1F00A409F4 /* AddressBook.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
@@ -111,12 +172,64 @@
 		E2EC1AC612F58B3B00BB0A8B /* TITokenFieldView */ = {
 			isa = PBXGroup;
 			children = (
+				EF09459913B1408800A409F4 /* ContactTableViewCell.h */,
+				EF09459A13B1408800A409F4 /* ContactTableViewCell.m */,
+				EF09459B13B1408800A409F4 /* ContactTableViewCell.xib */,
 				E2EC195E12F4AA7A00BB0A8B /* TITokenFieldView.h */,
 				E2EC195F12F4AA7A00BB0A8B /* TITokenFieldView.m */,
 				E2EC195C12F4AA7A00BB0A8B /* Names.h */,
 				E2EC195D12F4AA7A00BB0A8B /* Names.m */,
 			);
 			name = TITokenFieldView;
+			sourceTree = "<group>";
+		};
+		EF0945A613B28BA700A409F4 /* Other Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				EF0945AC13B2909B00A409F4 /* InviteFriendsController */,
+				EF0945A713B28BE300A409F4 /* InviteFriendGroupsViewController.h */,
+				EF0945A813B28BE300A409F4 /* InviteFriendGroupsViewController.m */,
+				EF0945A913B28BE300A409F4 /* InviteFriendGroupsViewController.xib */,
+				EF70306013B2F4D700E0565A /* GroupsTableViewCell.h */,
+				EF70306113B2F4D700E0565A /* GroupsTableViewCell.m */,
+				EF70306313B2F52100E0565A /* GroupsTableViewCell.xib */,
+			);
+			name = "Other Contacts";
+			sourceTree = "<group>";
+		};
+		EF0945AC13B2909B00A409F4 /* InviteFriendsController */ = {
+			isa = PBXGroup;
+			children = (
+				EF0945AD13B2915000A409F4 /* InviteFriendsViewController.h */,
+				EF0945AE13B2915000A409F4 /* InviteFriendsViewController.m */,
+				EF0945AF13B2915000A409F4 /* InviteFriendsViewController.xib */,
+				EF0945B213B2945800A409F4 /* InviteFriendsTableViewCell.h */,
+				EF0945B313B2945800A409F4 /* InviteFriendsTableViewCell.m */,
+				EF0945B513B2946B00A409F4 /* InviteFriendsTableViewCell.xib */,
+			);
+			name = InviteFriendsController;
+			sourceTree = "<group>";
+		};
+		EF0945BF13B2D48400A409F4 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EFE9F1C513B4DF770027ACA5 /* Groups-Back-Btn.png */,
+				EF14735813B3EB5700C76C60 /* Choose-Contacts-BG.png */,
+				EF14735913B3EB5700C76C60 /* invite-friends-bg.png */,
+				EFB4128813B3A387008893B1 /* check-mark.png */,
+				EF70305E13B2F3DE00E0565A /* notification-base.png */,
+				EF70305413B2D9A700E0565A /* bg-white-textured.png */,
+				EF0945CE13B2D54E00A409F4 /* bg-title-bar.png */,
+				EF0945CF13B2D54E00A409F4 /* bg-top-bar.png */,
+				EF0945CC13B2D54000A409F4 /* bg-teal.png */,
+				EF0945CA13B2D51A00A409F4 /* done-btn.png */,
+				EF0945C813B2D50B00A409F4 /* cancel-btn.png */,
+				EF0945C613B2D4FB00A409F4 /* white-striped-bg.png */,
+				EF0945C413B2D4F000A409F4 /* toolbar-bg.png */,
+				EF0945C213B2D4DB00A409F4 /* save-btn.png */,
+				EF0945C013B2D49000A409F4 /* bg-blue-overlay.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,11 +257,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			attributes = {
-				LastUpgradeCheck = 0420;
-			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TokenFieldExample" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -171,6 +281,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF09459D13B1408800A409F4 /* ContactTableViewCell.xib in Resources */,
+				EF0945AB13B28BE300A409F4 /* InviteFriendGroupsViewController.xib in Resources */,
+				EF0945B113B2915000A409F4 /* InviteFriendsViewController.xib in Resources */,
+				EF0945B613B2946C00A409F4 /* InviteFriendsTableViewCell.xib in Resources */,
+				EF0945C113B2D49000A409F4 /* bg-blue-overlay.png in Resources */,
+				EF0945C313B2D4DB00A409F4 /* save-btn.png in Resources */,
+				EF0945C513B2D4F000A409F4 /* toolbar-bg.png in Resources */,
+				EF0945C713B2D4FB00A409F4 /* white-striped-bg.png in Resources */,
+				EF0945C913B2D50B00A409F4 /* cancel-btn.png in Resources */,
+				EF0945CB13B2D51A00A409F4 /* done-btn.png in Resources */,
+				EF0945CD13B2D54000A409F4 /* bg-teal.png in Resources */,
+				EF0945D013B2D54E00A409F4 /* bg-title-bar.png in Resources */,
+				EF0945D113B2D54E00A409F4 /* bg-top-bar.png in Resources */,
+				EF70305513B2D9A700E0565A /* bg-white-textured.png in Resources */,
+				EF70305F13B2F3DE00E0565A /* notification-base.png in Resources */,
+				EF70306413B2F52200E0565A /* GroupsTableViewCell.xib in Resources */,
+				EFB4128913B3A387008893B1 /* check-mark.png in Resources */,
+				EF14735A13B3EB5700C76C60 /* Choose-Contacts-BG.png in Resources */,
+				EF14735B13B3EB5700C76C60 /* invite-friends-bg.png in Resources */,
+				EFE9F1C613B4DF770027ACA5 /* Groups-Back-Btn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +316,11 @@
 				28D7ACF80DDB3853001CB0EB /* TokenFieldExampleViewController.m in Sources */,
 				E2EC196012F4AA7A00BB0A8B /* Names.m in Sources */,
 				E2EC196112F4AA7A00BB0A8B /* TITokenFieldView.m in Sources */,
+				EF09459C13B1408800A409F4 /* ContactTableViewCell.m in Sources */,
+				EF0945AA13B28BE300A409F4 /* InviteFriendGroupsViewController.m in Sources */,
+				EF0945B013B2915000A409F4 /* InviteFriendsViewController.m in Sources */,
+				EF0945B413B2945800A409F4 /* InviteFriendsTableViewCell.m in Sources */,
+				EF70306213B2F4D800E0565A /* GroupsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +337,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TokenFieldExample_Prefix.pch;
 				INFOPLIST_FILE = "TokenFieldExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = TokenFieldExample;
 			};
 			name = Debug;
@@ -214,6 +350,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TokenFieldExample_Prefix.pch;
 				INFOPLIST_FILE = "TokenFieldExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = TokenFieldExample;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -223,10 +360,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ken Hanson (3E4K422TN2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ken Hanson (3E4K422TN2)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PREBINDING = NO;
+				PROVISIONING_PROFILE = "D9DD7F9C-8867-4BE2-9909-8A9274470CEA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D9DD7F9C-8867-4BE2-9909-8A9274470CEA";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -239,10 +381,48 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Release;
+		};
+		EFE9F1E513B509C90027ACA5 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Engine Labs";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Twin Engine Labs";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				PROVISIONING_PROFILE = "C7742A68-C02A-434F-BBB1-886B0B47248F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C7742A68-C02A-434F-BBB1-886B0B47248F";
+				SDKROOT = iphoneos;
+			};
+			name = "Ad Hoc";
+		};
+		EFE9F1E613B509C90027ACA5 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Engine Labs";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Twin Engine Labs";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TokenFieldExample_Prefix.pch;
+				INFOPLIST_FILE = "TokenFieldExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = TokenFieldExample;
+				PROVISIONING_PROFILE = "C7742A68-C02A-434F-BBB1-886B0B47248F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C7742A68-C02A-434F-BBB1-886B0B47248F";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad Hoc";
 		};
 /* End XCBuildConfiguration section */
 
@@ -252,6 +432,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				EFE9F1E613B509C90027ACA5 /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -261,6 +442,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				EFE9F1E513B509C90027ACA5 /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

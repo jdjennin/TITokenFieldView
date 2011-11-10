@@ -8,6 +8,24 @@
 
 #import "TokenFieldExampleAppDelegate.h"
 #import "TokenFieldExampleViewController.h"
+#import <QuartzCore/QuartzCore.h>
+
+// Nice custom nav bar...once we have an image for it...
+@implementation UINavigationBar (CustomBackground)
+
+- (void) drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
+  if ([self isMemberOfClass:[UINavigationBar class]] == NO || self.tag == 23) {
+    [super drawLayer:layer inContext:context];
+    return;
+  }
+  
+  UIImage *image = image = [UIImage imageNamed:@"bg-top-bar.png"];
+  
+  CGContextScaleCTM(context, 1, -1);
+  CGContextDrawImage(context, CGRectMake(0, - image.size.height, image.size.width, image.size.height), image.CGImage);
+}
+
+@end
 
 @implementation TokenFieldExampleAppDelegate
 
@@ -21,19 +39,21 @@
 	
 	TokenFieldExampleViewController * viewController = [[TokenFieldExampleViewController alloc] init];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+  [navigationController setDelegate:self];
 	[viewController release];
 	
-    [window addSubview:navigationController.view];
-    [window makeKeyAndVisible];
-
-    return YES;
+  [window addSubview:navigationController.view];
+  [window makeKeyAndVisible];
+  
+  return YES;
 }
 
 
 - (void)dealloc {
-    [navigationController release];
-    [window release];
-    [super dealloc];
+  [navigationController setDelegate:nil];
+  [navigationController release];
+  [window release];
+  [super dealloc];
 }
 
 
